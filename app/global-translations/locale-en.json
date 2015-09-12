@@ -90,6 +90,7 @@
     "label.heading.principal.repayment":"Principal Paid",
     "label.heading.arrears":"Arrears",
     "label.heading.serviceType":"External Service Type",
+    "label.heading.clientIdentifier.upload" : "Identifier Upload",
 
     "#Menu Links": "..",
     "label.menu.selectloanofficer": "Select Staff",
@@ -155,6 +156,7 @@
     "label.button.previous": "Previous",
     "label.button.next": "Next",
     "label.button.save": "Submit",
+    "label.button.proceed" : "Proceed",
     "label.button.searchdata": "Search Data",
     "label.button.cancel": "Cancel",
     "label.button.edit": "Edit",

@@ -21,6 +21,7 @@
                 requestParams.officeId = routeParams.officeId;
             }
             resourceFactory.clientTemplateResource.get(requestParams, function (data) {
+                console.log('clientTemplateResource', data);
                 scope.offices = data.officeOptions;
                 scope.staffs = data.staffOptions;
                 scope.formData.officeId = scope.offices[0].id;
@@ -69,6 +70,25 @@
             }else {
             	scope.cancel = "#/clients"
             }
+    // initialize tabIndex
+            scope.tabIndex = 0;
+            scope.tabs = [
+                { active: true },
+                { active: false },
+            ];
+    // function : move to next tab
+            scope.moveToNextTab = function() {
+                scope.tabs[scope.tabIndex].active = false;
+                scope.tabIndex++;
+                scope.tabs[scope.tabIndex].active = true;
+            };
+
+            scope.moveToPrevTab = function() {
+                scope.tabs[scope.tabIndex].active = false;
+                scope.tabIndex--;
+                scope.tabs[scope.tabIndex].active = true;
+            };
+
 
             scope.submit = function () {
                 var reqDate = dateFilter(scope.first.date, scope.df);
@@ -99,9 +119,16 @@
                     this.formData.savingsProductId = null;
                 }
 
-                resourceFactory.clientResource.save(this.formData, function (data) {
-                    location.path('/viewclient/' + data.clientId);
-                });
+                if(scope.clientId){
+                    scope.moveToNextTab();
+                }else{
+                    resourceFactory.clientResource.save(this.formData, function (data) {
+                        console.log('data', data);
+                        scope.clientId = data.clientId;
+                        //location.path('/viewclient/' + data.clientId);
+                        scope.moveToNextTab();
+                    });
+                }
             };
         }
     });
